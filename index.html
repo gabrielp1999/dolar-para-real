@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Dolar em Real</title>
+</head>
+<body>
+    <label for="">US$</label>
+    <input id="dolar" onkeyup="inputDolar(this)" onKeyPress="return(MascaraMoeda(this,'.',',',event))" type="text">
+
+    <label for="">R$</label>
+    <input id="real" onkeyup="inputReal(this)" onKeyPress="return(MascaraMoeda(this,'.',',',event))" type="text">
+
+    <script src="./main.js"></script>
+</body>
+</html>
