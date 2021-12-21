@@ -5,7 +5,8 @@ let valorDolar = 1;
 let valorReal = 5.72;
 
 function onkeyupDolar(inputDolar) {
-    const convertido = tranformarValor(inputDolar.value, valorDolar);
+    const valorTransformado = tranformarValor(inputDolar.value, "dolar");
+    valorDolar = valorTransformado.valorNumero;
 
     const calculo = valorDolar * valorAtualDolarEmReais;
     const temp = Math.floor(calculo * 100);
@@ -14,24 +15,26 @@ function onkeyupDolar(inputDolar) {
     const inputReal = document.getElementById("real");
     inputReal.value = resultado.toString().replace(".", ",");
 
-    inputDolar.value = convertido;
+    inputDolar.value = valorTransformado.valorTexto;
 }
 
 function onkeyupReal(inputReal) {
-    const convertido = tranformarValor(inputReal.value, valorReal);
+    const valorTranformado = tranformarValor(inputReal.value, "real");
+    valorReal = valorTranformado.valorNumero;
 
-    const calculo = valorDolar / valorAtualDolarEmReais;
+    const calculo = valorReal / valorAtualDolarEmReais;
     const temp = Math.floor(calculo * 100);
     const resultado = (temp / 100).toFixed(2);
 
     const inputDolar = document.getElementById("dolar");
     inputDolar.value = resultado.toString().replace(".", ",");
 
-    inputReal.value = convertido;
+    inputReal.value = valorTranformado.valorTexto;
 }
 
-function tranformarValor(valorInput, valorMudanca) {
+function tranformarValor(valorInput, moeda) {
     let temVirgula = false;
+    let valorNumero = moeda === "real" ? valorReal : valorDolar;
 
     if(ehNumero.test(valorInput)){
         
@@ -42,12 +45,18 @@ function tranformarValor(valorInput, valorMudanca) {
             temVirgula = true; 
         }
 
-        valorMudanca = parseFloat(valorInput.replace(",", "."));
+        valorNumero  = parseFloat(valorInput.replace(",", "."));
         
     } else if(valorInput === ""){
-        valorMudanca = 0;
+        valorNumero = 0;
     }
     
-    const convertido = valorMudanca.toString().replace(".", ",");
-    return temVirgula ? `${convertido},` : convertido;;
+    const convertido = valorNumero.toString().replace(".", ",");
+    return{
+        valorTexto: temVirgula ? `${convertido},` : convertido,
+        valorNumero 
+    }
 }
+
+document.getElementById('real').value = valorReal.toString().replace(".", ",");
+document.getElementById('dolar').value = valorDolar.toString().replace(".", ",");
