@@ -2,9 +2,26 @@
 // definir cacas decimais e limitar numeros
 const ehNumero = new RegExp("^(([\\d]{1,7})(\\,([\\d]{0,2}))?)$");
 
-const valorAtualDolarEmReais = 5.72;
+let valorAtualDolarEmReais = "";
 let valorDolar = 1;
-let valorReal = 5.75;
+let valorReal = "";
+
+
+async function buscarApi() {
+    const resultado = await axios(`https://economia.awesomeapi.com.br/last/USD-BRL`);
+
+    const idReal = document.getElementById('real');
+
+    let valorDolarApi = resultado.data.USDBRL.bid;
+    valorReal = valorDolarApi;
+    valorAtualDolarEmReais = valorDolarApi;
+
+    idReal.value = valorDolarApi;
+    // if(idReal = )
+
+    
+}
+
 
 function onkeyupDolar(inputDolar) {
     const valorTransformado = tranformarValor(inputDolar.value, "dolar");
@@ -69,3 +86,7 @@ function tranformarValor(valorInput, moeda) {
 
 document.getElementById('real').value = valorReal.toString().replace(".", ",");
 document.getElementById('dolar').value = valorDolar.toString().replace(".", ",");
+
+
+
+buscarApi()

@@ -1,9 +1,22 @@
 body {
-    padding: 20px;
     font-family: Roboto, Arial, sans-serif;
     font-weight: bold;
 }
 input {
     font-size: 17px;
+    height: 20px;
+    width: 120px;
 
+}
+
+#caixa {
+    display: flex;
+    height: 100px;
+    width: 90vw;
+    border: 2px solid black;
+    align-items: center;
+    justify-content: center;
+    background-color: gainsboro;
+    padding:10px;
+    border-radius: 10px;
 }

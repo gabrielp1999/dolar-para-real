@@ -8,12 +8,15 @@
     <title>Dolar em Real</title>
 </head>
 <body>
-    <label for="">US$</label>
-    <input id="dolar" onkeyup="onkeyupDolar(this)" type="text">
+    <div id="caixa">
+        <label for="">US$</label>
+        <input id="dolar" onkeyup="onkeyupDolar(this)" type="text">
 
-    <label for="">R$</label>
-    <input id="real" onkeyup="onkeyitupReal(this)" type="text">
+        <label for="">R$</label>
+        <input id="real" onkeyup="onkeyupReal(this)" type="text">
+    </div>    
 
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="./main.js"></script>
 </body>
 </html>
