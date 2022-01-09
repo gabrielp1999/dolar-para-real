@@ -2,24 +2,21 @@
 // definir cacas decimais e limitar numeros
 const ehNumero = new RegExp("^(([\\d]{1,7})(\\,([\\d]{0,2}))?)$");
 
+
+
 let valorAtualDolarEmReais = "";
-let valorDolar = 1;
+let valorDolar = "";
 let valorReal = "";
 
 
+
 async function buscarApi() {
-    const resultado = await axios(`https://economia.awesomeapi.com.br/last/USD-BRL`);
 
-    const idReal = document.getElementById('real');
+const resultado = await axios(`https://economia.awesomeapi.com.br/last/USD-BRL`);
+let valorDolarApi = resultado.data.USDBRL.bid;
 
-    let valorDolarApi = resultado.data.USDBRL.bid;
     valorReal = valorDolarApi;
     valorAtualDolarEmReais = valorDolarApi;
-
-    idReal.value = valorDolarApi;
-    // if(idReal = )
-
-    
 }
 
 
