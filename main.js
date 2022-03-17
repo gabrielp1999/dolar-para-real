@@ -7,17 +7,24 @@ const ehNumero = new RegExp("^(([\\d]{1,7})(\\,([\\d]{0,2}))?)$");
 let valorAtualDolarEmReais = "";
 let valorDolar = "";
 let valorReal = "";
-
+let valorEuro = "";
 
 
 async function buscarApi() {
 
-const resultado = await axios(`https://economia.awesomeapi.com.br/last/USD-BRL`);
-let valorDolarApi = resultado.data.USDBRL.bid;
+    const resultado = await axios(`https://economia.awesomeapi.com.br/last/USD-BRL,EUR-BRL`);
+    let valorDolarApi = resultado.data.USDBRL.bid;
+    let valorEuroApi = resultado.data.EURBRL.bid;
 
+
+    // const data = `Atualizado em: ${resultado.data.USDBRL.create_date}`;
+
+
+    valorEuro = valorEuroApi;
     valorReal = valorDolarApi;
     valorAtualDolarEmReais = valorDolarApi;
 }
+
 
 
 function onkeyupDolar(inputDolar) {
@@ -36,6 +43,7 @@ function onkeyupDolar(inputDolar) {
     inputReal.value = resultado.toString().replace(".", ",");
 
     inputDolar.value = valorTransformado.valorTexto;
+
 }
 
 function onkeyupReal(inputReal) {
@@ -47,12 +55,26 @@ function onkeyupReal(inputReal) {
     const temp = Math.floor(calculo * 100);
     const resultado = (temp / 100).toFixed(2);
 
+
+    const  calculoEuro = inputReal.value / valorEuro;
+    const temp2 = Math.floor(calculoEuro * 100);
+    const resultado2 = (temp2 / 100).toFixed(2);
+
     const inputDolar = document.getElementById("dolar");
+    const inputEuro = document.getElementById("euro");
         // o ToString converte o elemento para string 
        // replace substitui o primeiro item da aspa para o segundo
     inputDolar.value = resultado.toString().replace(".", ",");
-
+    
+    inputEuro.value = resultado2.toString().replace(".", ",");
     inputReal.value = valorTranformado.valorTexto;
+}
+
+function onkeyupEuro(inputEuro) {
+    const inputReal = document.getElementById("real");
+
+    const calculo = inputEuro.value * valorEuro;
+    inputReal.value = calculo;
 }
 
 function tranformarValor(valorInput, moeda) {

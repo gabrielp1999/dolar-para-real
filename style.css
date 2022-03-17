@@ -23,7 +23,7 @@ input {
     flex-direction: column;
     background-color: gainsboro;
     border-radius: 10px;
-    padding: 10px;
+    padding: 20px 0;
 }
 
 #divh2 {
