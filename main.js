@@ -7,25 +7,16 @@ const ehNumero = new RegExp("^(([\\d]{1,7})(\\,([\\d]{0,2}))?)$");
 let valorAtualDolarEmReais = "";
 let valorDolar = "";
 let valorReal = "";
-let valorEuro = "";
-
 
 async function buscarApi() {
 
     const resultado = await axios(`https://economia.awesomeapi.com.br/last/USD-BRL,EUR-BRL`);
     let valorDolarApi = resultado.data.USDBRL.bid;
-    let valorEuroApi = resultado.data.EURBRL.bid;
-
 
     // const data = `Atualizado em: ${resultado.data.USDBRL.create_date}`;
-
-
-    valorEuro = valorEuroApi;
     valorReal = valorDolarApi;
     valorAtualDolarEmReais = valorDolarApi;
 }
-
-
 
 function onkeyupDolar(inputDolar) {
     const valorTransformado = tranformarValor(inputDolar.value, "dolar");
